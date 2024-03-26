@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->integer('message_id')->autoIncrement();
+            $table->string('message');
+            $table->timestamp('sent')->nullable();
+            $table->timestamp('read')->nullable();
             $table->timestamps();
         });
     }
