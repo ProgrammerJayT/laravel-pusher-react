@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->integer('message_id')->autoIncrement();
+            $table->integer('sender_id');
+            $table->integer('recipient_id');
             $table->string('message');
             $table->timestamp('sent')->nullable();
             $table->timestamp('read')->nullable();
