@@ -11,7 +11,7 @@ class StoreMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,19 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             //
+            'message' => ['required', 'string'],
+            'senderId' => ['required', 'integer'],
+            'recipientId' => ['required', 'integer'],
+            'sender_id' => ['sometimes', 'integer'],
+            'recipient_id' => ['sometimes', 'integer']
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            'sender_id' => $this->senderId,
+            'recipient_id' => $this->recipientId
+        ]);
     }
 }
